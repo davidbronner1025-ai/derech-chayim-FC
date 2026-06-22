@@ -62,19 +62,15 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
 .btn-primary:active { transform:scale(0.98); opacity:0.8; }
 
 #controls { position:absolute; bottom:16px; left:16px; color:var(--text-secondary); font-size:12px; max-width:320px; line-height:1.6; font-family:var(--font-family); }
-#mobileControls { position:absolute; bottom:20px; left:20px; right:20px; height:200px; display:none; pointer-events:auto; z-index:20; }
-#joystickZone { position:absolute; bottom:0; left:0; width:130px; height:130px; background:var(--surface); border-radius:50%; border:1px solid var(--border); opacity:0.8; }
-#joystickKnob { position:absolute; width:55px; height:55px; background:var(--text-primary); border-radius:50%; top:37px; left:37px; pointer-events:none; transition:transform 0.05s; }
-.mobileBtn { position:absolute; background:var(--surface); border:1px solid var(--border); color:var(--text-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; touch-action:none; font-family:var(--font-family); box-shadow:var(--shadow-base); transition:var(--transition-fast); }
-.mobileBtn:active { transform:scale(0.9); opacity:0.8; background:var(--surface-alt); }
-#btnPass { width:75px; height:75px; bottom:100px; right:110px; }
-#btnShoot { width:85px; height:85px; bottom:10px; right:10px; font-size:16px; border-color:var(--danger); }
-#btnTackle { width:65px; height:65px; bottom:120px; right:200px; }
-#btnSwitch { width:60px; height:60px; bottom:30px; right:120px; }
-#btnSprint { width:55px; height:55px; bottom:10px; left:150px; }
-#btnLob { width:55px; height:55px; bottom:190px; right:30px; }
-#btnFinesse { width:55px; height:55px; bottom:190px; right:110px; }
-#btnSkill { width:55px; height:55px; bottom:200px; right:190px; }
+#mobileControls { position:absolute; bottom:0; left:0; width:100%; height:100%; display:none; pointer-events:none; z-index:20; }
+#joystickZone { position:absolute; bottom:30px; left:30px; width:130px; height:130px; background:rgba(26,29,36,0.3); border-radius:50%; border:2px solid rgba(255,255,255,0.2); opacity:0.8; pointer-events:auto; backdrop-filter:blur(4px); }
+#joystickKnob { position:absolute; width:55px; height:55px; background:rgba(255,255,255,0.7); border-radius:50%; top:37.5px; left:37.5px; pointer-events:none; transition:transform 0.05s; }
+.mobileBtn { position:absolute; background:rgba(26,29,36,0.5); border:1px solid rgba(255,255,255,0.3); color:rgba(255,255,255,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; touch-action:none; pointer-events:auto; font-family:var(--font-family); transition:var(--transition-fast); backdrop-filter:blur(4px); text-shadow:0 1px 2px rgba(0,0,0,0.8); }
+.mobileBtn:active { transform:scale(0.85); background:rgba(255,255,255,0.4); color:#000; }
+#btnRightMain { width:80px; height:80px; bottom:30px; right:30px; font-size:16px; border-color:var(--accent); background:rgba(76,175,80,0.3); } 
+#btnUpMain { width:70px; height:70px; bottom:120px; right:80px; border-color:var(--danger); background:rgba(244,67,54,0.3); } 
+#btnTopSide { width:65px; height:65px; bottom:200px; right:30px; background:rgba(33,150,243,0.3); border-color:#2196F3; } 
+#btnLeftSide { width:65px; height:65px; bottom:50px; right:120px; } 
 
 #goalOverlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:none; align-items:center; justify-content:center; z-index:var(--layer-3); pointer-events:none; flex-direction:column; backdrop-filter:blur(4px); }
 #goalText { font-family:var(--font-family); font-size:96px; color:var(--warning); font-weight:900; text-shadow:0 8px 32px rgba(255,179,0,0.5); animation:scaleIn var(--transition-base); }
@@ -140,6 +136,37 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
   #netSimPanel label { display:flex; justify-content:space-between; align-items:center; color:var(--text-secondary); font-size:13px; margin-bottom:8px; font-family:var(--font-family); }
   #netSimPanel input[type=range] { width:120px; accent-color:var(--accent); }
 
+  /* ========= MOBILE OPTIMIZATION (MEDIA QUERIES) ========= */
+  @media (max-width: 768px) {
+    /* Make flex rows stack vertically on small screens */
+    div[style*="flex-direction:row"], div[style*="gap:48px"] { flex-direction:column !important; gap:16px !important; }
+    div[style*="min-width:400px"] { min-width: 100% !important; }
+    
+    /* Lobby Layout */
+    #teamSelect h1 { font-size: 28px !important; }
+    #teamSelect { padding: 10px !important; }
+    #lobbyStep1 { gap: 16px !important; }
+    .lobby-card { min-width: 100% !important; padding: 16px !important; }
+    
+    /* In-Game HUD adjustments */
+    #scoreBoard { padding: 4px 12px; top: 10px; gap: 8px; font-size: 14px; }
+    #scoreBoard > div { border-radius: 8px; }
+    #scoreBoard div[style*="padding:12px 24px"] { padding: 6px 12px !important; font-size: 14px !important; min-width: 40px !important; }
+    #matchTime { font-size: 14px !important; }
+    
+    #pauseBtn { top: 10px; right: 10px; padding: 8px 12px; font-size: 12px; }
+    #minimap { width: 100px; height: 70px; top: 50px; right: 10px; }
+    #minimapCanvas { width: 100px !important; height: 70px !important; }
+    #momentumBars { top: 60px; width: 80% !important; }
+    #controls { display: none; } /* Hide PC controls help text */
+  }
+
+  /* Force Landscape Mode Warning Overlay */
+  #orientationWarning { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background); z-index: 100000; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px; }
+  @media (orientation: portrait) and (max-width: 768px) {
+    #orientationWarning { display: flex !important; }
+  }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -147,6 +174,11 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
 <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
+<div id="orientationWarning">
+  <h1 style="font-size:36px; color:var(--accent); margin-bottom:16px;">PLEASE ROTATE</h1>
+  <p style="font-size:18px; line-height:1.6;">For the best experience, please rotate your device to <b>Landscape Mode</b>.</p>
+  <div style="font-size:64px; margin-top:30px; animation:spin 2s linear infinite;">📱</div>
+</div>
 <div id='debugLogger' style='position:fixed;top:10px;left:10px;width:300px;height:400px;background:rgba(0,0,0,0.8);color:white;font-family:monospace;font-size:12px;overflow:auto;z-index:99999;padding:10px;pointer-events:none;'>DEBUG LOG:</div>
 <script>
 const oldLog = console.log; const oldErr = console.error; const oldWarn = console.warn;
@@ -431,14 +463,10 @@ console.warn = function(...args) { oldWarn(...args); logToScreen('WARN: ' + args
 
 <div id="mobileControls">
   <div id="joystickZone"><div id="joystickKnob"></div></div>
-  <div class="mobileBtn" id="btnSprint">ריצה</div>
-  <div class="mobileBtn" id="btnTackle">תיקול</div>
-  <div class="mobileBtn" id="btnPass">מסירה</div>
-  <div class="mobileBtn" id="btnSwitch">החלף</div>
-  <div class="mobileBtn" id="btnShoot">בעיטה</div>
-  <div class="mobileBtn" id="btnLob">הגבהה</div>
-  <div class="mobileBtn" id="btnFinesse">מסובבת</div>
-  <div class="mobileBtn" id="btnSkill">סקיל</div>
+  <div class="mobileBtn" id="btnRightMain">PASS</div>
+  <div class="mobileBtn" id="btnUpMain">SHOOT</div>
+  <div class="mobileBtn" id="btnTopSide">SPRINT</div>
+  <div class="mobileBtn" id="btnLeftSide">SKILL</div>
 </div>
 
 <script>
@@ -3008,6 +3036,28 @@ function setupJoystick() {
   document.addEventListener('touchcancel', endJ);
 }
 
+function updateMobileButtonsUI() {
+  if (document.getElementById('mobileControls').style.display === 'none') return;
+  const hasPossession = (ballOwner && selectedPlayer && ballOwner === selectedPlayer);
+  const mode = hasPossession ? 'ATTACK' : 'DEFENSE';
+  if (window._mobileBtnMode === mode) return;
+  window._mobileBtnMode = mode;
+
+  const btnR = document.getElementById('btnRightMain'); // PASS / SWITCH
+  const btnU = document.getElementById('btnUpMain');    // SHOOT / TACKLE
+  const btnL = document.getElementById('btnLeftSide');  // SKILL
+
+  if (mode === 'ATTACK') {
+    if (btnR) { btnR.textContent = 'PASS'; btnR.style.borderColor = 'var(--accent)'; btnR.style.background = 'rgba(76,175,80,0.3)'; }
+    if (btnU) { btnU.textContent = 'SHOOT'; btnU.style.borderColor = 'var(--danger)'; btnU.style.background = 'rgba(244,67,54,0.3)'; }
+    if (btnL) { btnL.style.display = 'flex'; }
+  } else {
+    if (btnR) { btnR.textContent = 'SWITCH'; btnR.style.borderColor = '#9E9E9E'; btnR.style.background = 'rgba(158,158,158,0.3)'; }
+    if (btnU) { btnU.textContent = 'TACKLE'; btnU.style.borderColor = '#FF9800'; btnU.style.background = 'rgba(255,152,0,0.3)'; }
+    if (btnL) { btnL.style.display = 'none'; }
+  }
+}
+
 function setupMobileButtons() {
   function addBtn(id, sf, ef) {
     const b = document.getElementById(id);
@@ -3016,14 +3066,16 @@ function setupMobileButtons() {
     b.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); if (ef) ef(); }, {passive:false});
     b.addEventListener('touchcancel', e => { e.preventDefault(); e.stopPropagation(); if (ef) ef(); }, {passive:false});
   }
-  addBtn('btnPass', startPass, endPass);
-  addBtn('btnLob', () => { window.isLobPass = true; startPass(); }, () => { window.isLobPass = false; endPass(); });
-  addBtn('btnShoot', startShoot, endShoot);
-  addBtn('btnFinesse', () => { window.isFinesseShoot = true; startShoot(); }, () => { window.isFinesseShoot = false; endShoot(); });
-  addBtn('btnTackle', doTackle, null);
-  addBtn('btnSkill', doSkillMove, null);
-  addBtn('btnSwitch', smartSwitchPlayer, null);
-  addBtn('btnSprint', () => keys['ShiftLeft']=true, () => keys['ShiftLeft']=false);
+  
+  addBtn('btnRightMain', () => { if(window._mobileBtnMode === 'ATTACK') startPass(); else smartSwitchPlayer(); }, 
+                         () => { if(window._mobileBtnMode === 'ATTACK') endPass(); });
+                         
+  addBtn('btnUpMain', () => { if(window._mobileBtnMode === 'ATTACK') startShoot(); else doTackle(); }, 
+                      () => { if(window._mobileBtnMode === 'ATTACK') endShoot(); });
+                      
+  addBtn('btnTopSide', () => keys['ShiftLeft']=true, () => keys['ShiftLeft']=false);
+  
+  addBtn('btnLeftSide', () => { if(window._mobileBtnMode === 'ATTACK') doSkillMove(); }, null);
 }
 
 function getInput() {
@@ -6164,6 +6216,9 @@ function updatePlayerAnimation(p, dt) {
 }
 
 function updateVisuals(dt) {
+  // Mobile dynamic buttons
+  updateMobileButtonsUI();
+
   // B1: Phase 4: Interpolate Remote Entities for Guest/Spectator
   interpolateRemoteEntities();
 
