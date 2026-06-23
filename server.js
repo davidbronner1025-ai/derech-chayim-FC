@@ -128,7 +128,10 @@ io.on('connection', (socket) => {
     console.log(`[Room] ${room.code} created by ${socket.id}`);
   });
 
-  socket.on('joinRoom', ({ roomCode }) => {
+  socket.on('joinRoom', ({ roomCode, version }) => {
+    if (version !== '1.0.0') {
+      return socket.emit('joinError', { message: 'Version Mismatch. Please refresh the page to get the latest version.' });
+    }
     const code = (roomCode || '').toUpperCase().trim();
     const room = rooms[code];
     if (!room) return socket.emit('joinError', { message: 'Room not found.' });
@@ -201,12 +204,14 @@ io.on('connection', (socket) => {
   });
 
   // ---- Ready / Match start ----
-  socket.on('playerReady', ({ teamData, formation, tactics }) => {
+  const crypto = require('crypto');
+  socket.on('playerReady', ({ teamData, matchConfig }) => {
     const room = rooms[socket._roomCode];
     if (!room) return;
     if (socket._role === 'host') {
       room.hostReady = true;
       room.hostTeam  = teamData || room.hostTeam;
+      if (matchConfig) room.matchConfig = matchConfig;
       if (room.guest) room.guest.emit('opponentReady', { teamData: room.hostTeam });
     } else if (socket._role === 'guest') {
       room.guestReady = true;
@@ -214,12 +219,44 @@ io.on('connection', (socket) => {
       room.host.emit('opponentReady', { teamData: room.guestTeam });
     }
     if (room.hostReady && room.guestReady) {
-      room.matchState = 'PLAYING';
-      io.to(room.code).emit('matchStart', {
+      room.matchState = 'LOCKED';
+      // Assign UUIDs to squads
+      if (room.hostTeam && room.hostTeam.squad) {
+         room.hostTeam.squad.forEach(p => p.mpId = crypto.randomUUID());
+      }
+      if (room.guestTeam && room.guestTeam.squad) {
+         room.guestTeam.squad.forEach(p => p.mpId = crypto.randomUUID());
+      }
+      
+      io.to(room.code).emit('matchLocked', {
         hostTeam:  room.hostTeam,
-        guestTeam: room.guestTeam
+        guestTeam: room.guestTeam,
+        matchConfig: room.matchConfig || {}
       });
-      console.log(`[Room] ${room.code} MATCH START`);
+      console.log(`[Room] ${room.code} MATCH LOCKED`);
+      
+      room.hostLoaded = false;
+      room.guestLoaded = false;
+      
+      room.sceneLoadTimeout = setTimeout(() => {
+        io.to(room.code).emit('matchCancelled', { reason: 'Timeout waiting for players to load.' });
+        room.matchState = 'IDLE';
+        room.hostReady = false; room.guestReady = false;
+      }, 30000);
+    }
+  });
+  
+  socket.on('sceneLoaded', () => {
+    const room = rooms[socket._roomCode];
+    if (!room) return;
+    if (socket._role === 'host') room.hostLoaded = true;
+    if (socket._role === 'guest') room.guestLoaded = true;
+    
+    if (room.hostLoaded && room.guestLoaded) {
+       clearTimeout(room.sceneLoadTimeout);
+       room.matchState = 'PLAYING';
+       io.to(room.code).emit('kickoff');
+       console.log(`[Room] ${room.code} KICKOFF!`);
     }
   });
 
