@@ -2829,7 +2829,8 @@ function createPlayer(teamData, num, x, z, role, subRole, isUserTeam, playerData
     name: playerName,
     playerName: playerName,
     leftThigh, rightThigh, leftCalf, rightCalf,
-    leftArm, rightArm, torso, head, runCycle:0, aura,
+    leftArm, rightArm, torso, head, runCycle:0,
+
     reactionDelay: 0
   };
   generatePlayerStats(playerObj);
@@ -6001,14 +6002,7 @@ function update(dt) {
       }
     }
 
-    // Momentum / Hype Aura logic
-    if (p.isUserTeam && userCombo >= 3) {
-      p.aura.material.opacity = 0.3 + Math.sin(Date.now() * 0.01) * 0.2;
-      p.aura.rotation.y += 0.05;
-      p.aura.material.color.setHex(userCombo >= 8 ? 0xff0000 : 0xffaa00);
-    } else {
-      p.aura.material.opacity = 0;
-    }
+
 
     // Apply velocity
     p.x += p.vx * dt;
