@@ -162,6 +162,11 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
     #pauseBtn { top: 10px !important; right: 10px !important; width: 44px !important; height: 44px !important; padding: 0 !important; background: rgba(0,0,0,0.4) !important; color: transparent !important; overflow: hidden; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.3) !important; display: flex !important; justify-content: center !important; align-items: center !important; font-size: 0 !important; }
     #pauseBtn::after { content: '⚙️'; font-size: 24px; color: white; display: block; }
     
+    /* Camera Button */
+    #camBtn { top: 10px !important; right: 64px !important; width: 44px !important; height: 44px !important; padding: 0 !important; background: rgba(0,0,0,0.4) !important; color: transparent !important; overflow: hidden; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.3) !important; display: flex !important; justify-content: center !important; align-items: center !important; font-size: 0 !important; }
+    #camBtn::after { content: '🎥'; font-size: 22px; color: white; display: block; }
+
+    
     /* Minimap on top left */
     #minimap { width: 90px !important; height: 60px !important; top: 10px !important; left: 10px !important; right: auto !important; opacity: 0.7; }
     #minimapCanvas { width: 90px !important; height: 60px !important; }
@@ -493,6 +498,7 @@ window.addEventListener('keydown', (e) => {
   </div>
   <div id="flashOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;opacity:0;pointer-events:none;z-index:9999;transition:opacity 0.05s;"></div>
   <div id="pauseBtn" style="position:absolute; top:24px; right:32px; background:var(--surface); color:var(--text-primary); padding:12px 24px; border-radius:12px; cursor:pointer; font-weight:800; font-size:16px; border:1px solid var(--border); box-shadow:var(--shadow-base); z-index:100; pointer-events:auto; font-family:var(--font-family); transition:var(--transition-fast);">TACTICS / PAUSE</div>
+  <div id="camBtn" style="display:none; position:absolute; top:24px; right:200px; background:var(--surface); color:var(--text-primary); padding:12px 24px; border-radius:12px; cursor:pointer; font-weight:800; font-size:16px; border:1px solid var(--border); box-shadow:var(--shadow-base); z-index:100; pointer-events:auto; font-family:var(--font-family); transition:var(--transition-fast);">CAMERA</div>
   <div id="controls">
     WASD/חצים=תזוזה | SHIFT=ריצה | רווח=מסירה | Q=הגבהה | V=מסירת עומק | E=בעיטה | R=מסובבת | F=סקיל | C=תיקול | X=מצלמה | TAB=החלפה
   </div>
@@ -3122,6 +3128,14 @@ function setupInputs() {
     if (joy) { joy.active = false; joy.x = 0; joy.y = 0; joy.touchId = null; }
     const knob = document.getElementById('joystickKnob');
     if (knob) knob.style.transform = 'translate(0,0)';
+    document.getElementById('pauseMenu').style.display = 'flex';
+    const celebUI = document.getElementById('celebUI');
+    if (celebUI) celebUI.remove();
+  });
+
+  document.getElementById('camBtn').addEventListener('click', () => {
+    switchCamera();
+  });
     // Save current stamina to squad data
     players.forEach(p => {
       const sq = p.isUserTeam ? userTeam.squad : aiTeam.squad;
@@ -7677,6 +7691,7 @@ window.addEventListener('DOMContentLoaded', init);
       document.getElementById('scoreBoard').style.display = 'flex';
       document.getElementById('minimap').style.display = 'block';
       document.getElementById('pauseBtn').style.display = 'block';
+      document.getElementById('camBtn').style.display = 'block';
       document.getElementById('controls').style.display = 'block';
       updateMobileControlsVisibility();
       gameFreezeTimer = 1.0;
