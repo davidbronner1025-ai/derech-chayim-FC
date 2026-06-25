@@ -41,26 +41,26 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
 #gameCanvas { position:fixed; top:0; left:0; width:100%; height:100%; display:block; z-index:0; }
 #uiLayer { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10; display:block; }
 
-#scoreBoard { position:absolute; top:24px; left:50%; transform:translateX(-50%); background:var(--surface); color:var(--text-primary); padding:12px 32px; border-radius:16px; font-size:20px; font-weight:800; display:flex; gap:24px; align-items:center; border:1px solid var(--border); box-shadow:var(--shadow-base); }
-#matchTime { color:var(--warning); font-family:monospace; font-size:20px; }
+#scoreBoard { position:absolute; top:24px; left:48px; display:flex; align-items:center; background:linear-gradient(90deg, rgba(15,17,21,0.95), rgba(26,29,36,0.95)); border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.6); font-family:var(--font-family); font-weight:800; transform:scale(0.85); transform-origin:top left; z-index:5; }
+#matchTime { color:var(--accent); font-family:monospace; font-size:22px; }
 
-#teamSelect { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--background); z-index:var(--layer-2); display:flex; flex-direction:column; align-items:center; overflow-y:auto; overflow-x:hidden; padding:40px 20px; pointer-events:auto; touch-action:pan-y !important; }
+#teamSelect { position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom, rgba(15,17,21,0.5), rgba(26,29,36,0.95)); z-index:var(--layer-2); display:flex; flex-direction:column; align-items:center; overflow-y:auto; overflow-x:hidden; padding:40px 20px; pointer-events:auto; touch-action:pan-y !important; }
 #teamSelect h1 { font-family:var(--font-family); color:var(--text-primary); font-size:48px; font-weight:800; margin-bottom:10px; }
 #teamSelect h2 { font-family:var(--font-family); color:var(--text-secondary); font-size:16px; font-weight:600; text-transform:uppercase; margin-bottom:24px; letter-spacing:1px; }
 
 .teamsRow { display:flex; gap:16px; margin-bottom:40px; flex-wrap:wrap; justify-content:center; }
-.teamCard { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; color:var(--text-primary); cursor:pointer; transition:transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); text-align:center; min-width:160px; box-shadow:var(--shadow-base); touch-action:manipulation; }
-.teamCard:hover { transform:scale(1.02); border-color:var(--text-secondary); box-shadow:var(--shadow-hover); }
-.teamCard.selected { border-color:var(--accent); background:var(--surface-alt); box-shadow:0 0 20px rgba(76,175,80,0.2); }
+.teamCard { background:rgba(26,29,36,0.95); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:24px; color:var(--text-primary); cursor:pointer; transition:transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), background var(--transition-base); text-align:center; min-width:220px; box-shadow:var(--shadow-base); touch-action:manipulation; overflow:hidden; position:relative; }
+.teamCard:hover { transform:translateY(-6px); border-color:var(--text-secondary); box-shadow:0 12px 32px rgba(0,0,0,0.6); background:rgba(35,39,48,0.95); }
+.teamCard.selected { border-color:var(--accent); background:rgba(35,39,48,1); box-shadow:0 8px 24px rgba(76,175,80,0.3); transform:translateY(-2px); }
 .teamColor { width:64px; height:64px; border-radius:50%; margin:0 auto 16px; border:2px solid var(--border); }
 
-#startBtn { background:var(--accent); color:var(--background); border:none; padding:16px 64px; font-size:18px; border-radius:12px; cursor:pointer; font-weight:800; font-family:var(--font-family); transition:transform var(--transition-fast), opacity var(--transition-fast); box-shadow:var(--shadow-base); }
-#startBtn:hover:not(:disabled) { transform:scale(1.02); opacity:0.9; box-shadow:var(--shadow-hover); }
+#startBtn { background:var(--accent); color:var(--background); border:none; padding:16px 64px; font-size:18px; border-radius:12px; cursor:pointer; font-weight:800; font-family:var(--font-family); transition:transform var(--transition-fast), box-shadow var(--transition-fast); box-shadow:var(--shadow-base); }
+#startBtn:hover:not(:disabled) { transform:translateY(-4px); box-shadow:0 12px 24px rgba(76,175,80,0.4); }
 #startBtn:disabled { background:var(--surface-alt); color:var(--text-secondary); cursor:not-allowed; box-shadow:none; }
 
-.btn-primary { background:var(--accent); color:var(--background); border:none; padding:16px 32px; font-size:16px; border-radius:12px; cursor:pointer; font-weight:800; font-family:var(--font-family); transition:transform var(--transition-fast), opacity var(--transition-fast); box-shadow:var(--shadow-base); }
-.btn-primary:hover { transform:scale(1.02); opacity:0.9; box-shadow:var(--shadow-hover); }
-.btn-primary:active { transform:scale(0.98); opacity:0.8; }
+.btn-primary { background:var(--accent); color:var(--background); border:none; padding:16px 32px; font-size:16px; border-radius:12px; cursor:pointer; font-weight:800; font-family:var(--font-family); transition:transform var(--transition-fast), box-shadow var(--transition-fast); box-shadow:var(--shadow-base); }
+.btn-primary:hover { transform:translateY(-4px); box-shadow:0 12px 24px rgba(76,175,80,0.4); }
+.btn-primary:active { transform:translateY(0); }
 
 #controls { position:absolute; bottom:16px; left:16px; color:var(--text-secondary); font-size:12px; max-width:320px; line-height:1.6; font-family:var(--font-family); }
 #mobileControls { position:absolute; bottom:0; left:0; width:100%; height:100%; display:none; pointer-events:none; z-index:20; }
@@ -107,8 +107,13 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
     padding: 10px;
     border: 1px solid #0f0;
     z-index: 10000;
-    pointer-events: none;
-    text-align: right;
+    pointer-events: auto;
+    text-align: left;
+    width: auto;
+    max-width: 260px;
+    resize: both;
+    overflow: auto;
+    display: none;
   }
 
   /* ========= MULTIPLAYER UI ========= */
@@ -130,7 +135,7 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
   .nav-tab:not(.active) { opacity:0.5; }
 
   /* Telemetry Overlay (F8) */
-  #telemetryOverlay { position:absolute; top:80px; right:24px; background:rgba(0,0,0,0.85); color:#0f0; font-family:monospace; font-size:13px; padding:12px 16px; border:1px solid #0f0; border-radius:8px; z-index:10000; pointer-events:none; display:none; min-width:240px; line-height:1.6; }
+  #telemetryOverlay { position:absolute; top:120px; right:10px; background:rgba(0,0,0,0.85); color:#0f0; font-family:monospace; font-size:13px; padding:12px 16px; border:1px solid #0f0; border-radius:8px; z-index:10000; pointer-events:auto; display:none; width:auto; max-width:260px; line-height:1.6; resize:both; overflow:auto; }
 
   /* Network Simulator Panel */
   #netSimPanel { position:fixed; bottom:20px; right:20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; z-index:9999; display:none; width:280px; box-shadow:var(--shadow-hover); pointer-events:auto; }
@@ -150,7 +155,8 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
     .lobby-card { min-width: 100% !important; padding: 16px !important; }
     
     /* In-Game HUD adjustments for mobile (eFootball style) */
-    #scoreBoard { transform: scale(0.65); transform-origin: top center; top: 0px !important; }
+    /* In-Game HUD adjustments for mobile (eFootball style) */
+    #scoreBoard { transform: scale(0.65); transform-origin: top left; top: 12px; left: 12px; }
     
     /* Turn TACTICS / PAUSE into a small icon */
     #pauseBtn { top: 10px !important; right: 10px !important; width: 44px !important; height: 44px !important; padding: 0 !important; background: rgba(0,0,0,0.4) !important; color: transparent !important; overflow: hidden; border-radius: 50% !important; border: 1px solid rgba(255,255,255,0.3) !important; display: flex !important; justify-content: center !important; align-items: center !important; font-size: 0 !important; }
@@ -195,7 +201,7 @@ html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; back
   <p style="font-size:18px; line-height:1.6;">For the best experience, please rotate your device to <b>Landscape Mode</b>.</p>
   <div style="font-size:64px; margin-top:30px; animation:spin 2s linear infinite;">📱</div>
 </div>
-<div id='debugLogger' style='position:fixed;top:10px;left:10px;width:300px;height:400px;background:rgba(0,0,0,0.8);color:white;font-family:monospace;font-size:12px;overflow:auto;z-index:99999;padding:10px;pointer-events:none;'>DEBUG LOG:</div>
+<div id='debugLogger' style='position:fixed;top:10px;left:10px;width:260px;max-width:260px;height:200px;background:rgba(0,0,0,0.8);color:white;font-family:monospace;font-size:12px;overflow:auto;resize:both;z-index:99999;padding:10px;pointer-events:auto;display:none;'>DEBUG LOG:</div>
 <script>
 const oldLog = console.log; const oldErr = console.error; const oldWarn = console.warn;
 function logToScreen(msg, color='white') {
@@ -209,15 +215,31 @@ window.addEventListener('unhandledrejection', function(e) { logToScreen('PROMISE
 console.log = function(...args) { oldLog(...args); logToScreen(args.join(' ')); };
 console.error = function(...args) { oldErr(...args); logToScreen('ERR: ' + args.join(' '), 'red'); };
 console.warn = function(...args) { oldWarn(...args); logToScreen('WARN: ' + args.join(' '), 'orange'); };
+
+window.DEBUG_MODE = false;
+window.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')) {
+    window.DEBUG_MODE = !window.DEBUG_MODE;
+    const dLog = document.getElementById('debugLogger');
+    const pOverlay = document.getElementById('profilerOverlay');
+    const tOverlay = document.getElementById('telemetryOverlay');
+    if (dLog) dLog.style.display = window.DEBUG_MODE ? 'block' : 'none';
+    if (pOverlay) pOverlay.style.display = window.DEBUG_MODE ? 'block' : 'none';
+    if (tOverlay) tOverlay.style.display = window.DEBUG_MODE ? 'block' : 'none';
+    
+    // The main render loop handles updating profiler/telemetry if visible
+  }
+});
 </script>
 <div id="teamSelect">
   <!-- Top Navigation -->
   <div style="width:100%; max-width:1400px; margin:0 auto; padding:24px 48px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); margin-bottom:24px; flex-shrink: 0;">
     <h1 class="heading" style="color:var(--accent); font-size:32px; margin:0; text-shadow:0 0 20px rgba(76,175,80,0.4);">FOOTBALL PRO 3D v1.1</h1>
     <div style="display:flex; gap:32px;">
-      <span class="section-title nav-tab active" data-tab="quickmatch" onclick="switchMenuTab('quickmatch')">QUICK MATCH</span>
-      <span class="section-title nav-tab" data-tab="online" onclick="switchMenuTab('online')" style="color:#4FC3F7;">🌐 PLAY ONLINE</span>
+      <span class="section-title nav-tab active" data-tab="play" onclick="switchMenuTab('play')">PLAY</span>
+      <span class="section-title nav-tab" data-tab="online" onclick="switchMenuTab('online')" style="color:#4FC3F7;">ONLINE</span>
       <span class="section-title nav-tab" data-tab="tournament">TOURNAMENT</span>
+      <span class="section-title nav-tab" data-tab="career">CAREER</span>
       <span class="section-title nav-tab" data-tab="settings">SETTINGS</span>
     </div>
   </div>
@@ -232,9 +254,11 @@ console.warn = function(...args) { oldWarn(...args); logToScreen('WARN: ' + args
         <div class="body-text" style="max-width:400px; margin-top:8px;">Choose your primary team. Your club's identity will define the stadium atmosphere and game style.</div>
       </div>
       
-        <div style="display:flex; gap:16px; margin-bottom: 16px;">
-          <button id="btnCategoryClub" onclick="setTeamCategory('club')" style="flex:1; padding:12px; background:var(--accent); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">קבוצות רשמיות</button>
-          <button id="btnCategoryNational" onclick="setTeamCategory('national')" style="flex:1; padding:12px; background:var(--surface-alt); color:var(--text-primary); border:1px solid var(--border); border-radius:8px; cursor:pointer; font-weight:bold;">נבחרות לאומיות</button>
+        <div style="display:flex; gap:8px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+          <div class="team-tab active" onclick="setTeamCategory('club')" data-category="club" style="cursor:pointer; padding:8px 16px; font-weight:bold; color:var(--text-primary); border-bottom: 2px solid var(--accent); transition:var(--transition-fast);">CLUBS</div>
+          <div class="team-tab" onclick="setTeamCategory('national')" data-category="national" style="cursor:pointer; padding:8px 16px; font-weight:bold; color:var(--text-secondary); border-bottom: 2px solid transparent; transition:var(--transition-fast);">NATIONAL TEAMS</div>
+          <div class="team-tab" onclick="setTeamCategory('classic')" data-category="classic" style="cursor:pointer; padding:8px 16px; font-weight:bold; color:var(--text-secondary); border-bottom: 2px solid transparent; transition:var(--transition-fast);">CLASSIC TEAMS</div>
+          <div class="team-tab" onclick="setTeamCategory('custom')" data-category="custom" style="cursor:pointer; padding:8px 16px; font-weight:bold; color:var(--text-secondary); border-bottom: 2px solid transparent; transition:var(--transition-fast);">CUSTOM TEAMS</div>
         </div>
         <div id="teamsListUser" class="teamsRow" style="justify-content:flex-start; margin-bottom:0;"></div>
 
@@ -415,17 +439,14 @@ console.warn = function(...args) { oldWarn(...args); logToScreen('WARN: ' + args
 <canvas id="gameCanvas"></canvas>
 <div id="profilerOverlay">Profiling...</div>
 <div id="uiLayer">
-  <div id="scoreBoard" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-    <div style="display:flex; background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow-base); font-family:var(--font-family);">
-      <div id="teamAColor" style="width:8px; background:var(--accent);"></div>
-      <div style="padding:12px 24px; font-weight:800; font-size:20px; background:var(--surface-alt); min-width:80px; text-align:center; text-transform:uppercase;"><span id="teamA">HOME</span></div>
-      <div style="padding:12px 24px; font-weight:800; font-size:24px; background:var(--background); color:var(--text-primary); min-width:60px; text-align:center;"><span id="scoreA">0</span></div>
-      <div style="padding:12px 8px; font-weight:800; font-size:24px; background:var(--background); color:var(--text-secondary);">-</div>
-      <div style="padding:12px 24px; font-weight:800; font-size:24px; background:var(--background); color:var(--text-primary); min-width:60px; text-align:center;"><span id="scoreB">0</span></div>
-      <div style="padding:12px 24px; font-weight:800; font-size:20px; background:var(--surface-alt); min-width:80px; text-align:center; text-transform:uppercase;"><span id="teamB">AWAY</span></div>
-      <div id="teamBColor" style="width:8px; background:#ff4444;"></div>
-    </div>
-    <div style="background:var(--surface); border:1px solid var(--border); padding:4px 16px; border-radius:8px; font-family:monospace; font-weight:bold; color:var(--warning); font-size:16px;">
+  <div id="scoreBoard">
+    <div id="teamAColor" style="width:12px; align-self:stretch; background:var(--accent);"></div>
+    <div style="padding:10px 20px; font-size:24px; color:#fff; min-width:80px; text-align:center; letter-spacing:1px;"><span id="teamA">HOM</span></div>
+    <div style="padding:10px 24px; font-size:32px; background:rgba(0,0,0,0.4); color:#fff; text-align:center;"><span id="scoreA">0</span></div>
+    <div style="padding:10px 24px; font-size:32px; background:rgba(0,0,0,0.4); color:#fff; text-align:center;"><span id="scoreB">0</span></div>
+    <div style="padding:10px 20px; font-size:24px; color:#fff; min-width:80px; text-align:center; letter-spacing:1px;"><span id="teamB">AWA</span></div>
+    <div id="teamBColor" style="width:12px; align-self:stretch; background:#ff4444;"></div>
+    <div style="padding:10px 24px; font-family:monospace; font-weight:bold; color:var(--accent); font-size:24px; background:rgba(255,255,255,0.05); border-left:1px solid rgba(255,255,255,0.1);">
       <span id="matchTime">00:00</span>
     </div>
   </div>
@@ -738,18 +759,29 @@ function evaluateDecision(aiPlayer, decisionType, detail) {
   telemetryData.decisions[evalRes]++;
 }
 
+function getDifficultyDelay() {
+  const d = window.difficultyLevel || 'NORMAL';
+  if (d === 'EASY') return 0.5;
+  if (d === 'NORMAL') return 0.25;
+  if (d === 'HARD') return 0.1;
+  if (d === 'EXTREME') return 0.016; // 1 frame
+  return 0.25;
+}
+
 function setBallLoose(causePlayer) {
   if (ballOwner) {
      ballOwner.hasBall = false;
   }
   ballOwner = null;
   
-  // Phase 1D: Reaction Delay
+  // Phase 1D: Reaction Delay (Zero Human Error fix)
   players.forEach(p => {
       if (p !== causePlayer && !p.isGK) {
-          const reactionStat = p.stats ? p.stats.speed : 0.5; // use speed for reaction for now
+          const reactionStat = p.stats ? p.stats.speed : 0.5;
           const staminaFactor = p.stamina / 100;
-          p.reactionDelay = 0.5 - (reactionStat * 0.3) - (staminaFactor * 0.1);
+          let diffDelay = p.isUserTeam ? 0.2 : getDifficultyDelay();
+          p.reactionDelay = diffDelay - (reactionStat * 0.1) - (staminaFactor * 0.05);
+          if (p.reactionDelay < 0) p.reactionDelay = 0;
       }
   });
 }
@@ -1959,6 +1991,32 @@ function getDynamicPosition(p, phase) {
         }
       }
     }
+    
+    // --- Phase 3: Tactical Identity Modifiers ---
+    if (tactics.style === 'possession') {
+      // Pull players closer to ball to form tight passing networks (Tiki-Taka)
+      tx -= dir * 8; // Stay deeper
+      if (p.role === 'mid') {
+          // Midfielders pinch in to create central overloads
+          tz *= 0.6; 
+      }
+    } else if (tactics.style === 'counter_attack') {
+      // Exploit space aggressively
+      if (p.role === 'fwd' || p.role === 'wing') {
+          tx += dir * 15; // Sprint into depth!
+      } else if (p.role === 'mid') {
+          tx += dir * 8; // Midfielders join fast
+      }
+    } else if (tactics.style === 'wing_play') {
+      // Overload the flanks
+      if (p.role === 'wing' || p.subRole.includes('wb')) {
+          tx += dir * 10;
+          tz = Math.sign(baseZ) * (PITCH_H/2 - 2); // Hug the touchline
+      } else if (p.role === 'fwd') {
+          tz *= 0.3; // Stay central for crosses
+      }
+    }
+    
   } else if (phase === 'defend') {
     const drop = 1 - tactics.defensiveLine;
     
@@ -2112,7 +2170,7 @@ window.Profiler = {
             const avgFT = (this.totalFrameTime / this.frames).toFixed(2);
             
             const overlay = document.getElementById('profilerOverlay');
-            if (overlay) {
+            if (overlay && window.DEBUG_MODE) {
                 overlay.innerHTML = 
                     'FPS Avg: ' + avgFPS + '<br>' +
                     'Frame Time Avg: ' + avgFT + ' ms<br>' +
@@ -2143,6 +2201,9 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   clock = new THREE.Clock();
 
@@ -2166,9 +2227,9 @@ function init() {
 }
 
 function setupLights() {
-  ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+  ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
   scene.add(ambientLight);
-  dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
+  dirLight = new THREE.DirectionalLight(0xffeedd, 2.0);
   dirLight.position.set(40, 90, 60);
   dirLight.castShadow = true;
   dirLight.shadow.mapSize.set(1024, 1024); // PERF: 1024 is sufficient for football field
@@ -2185,50 +2246,165 @@ function setupLights() {
 function updateTimeOfDay() {
   if (!dirLight) return;
   if (window.timeMode === 'DAY') {
-      ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.55;
-      dirLight.color.setHex(0xffffff); dirLight.intensity = 0.9;
-      fillLight.color.setHex(0xaaccff); fillLight.intensity = 0.3;
+      ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.6;
+      dirLight.color.setHex(0xffeedd); dirLight.intensity = 1.3;
+      fillLight.color.setHex(0xaaccff); fillLight.intensity = 0.4;
       scene.background = new THREE.Color(0x87CEEB); 
   } else if (window.timeMode === 'SUNSET') {
-      ambientLight.color.setHex(0xffa07a); ambientLight.intensity = 0.4;
-      dirLight.color.setHex(0xff7f50); dirLight.intensity = 1.0;
-      fillLight.color.setHex(0xffb6c1); fillLight.intensity = 0.3;
+      ambientLight.color.setHex(0xffa07a); ambientLight.intensity = 0.8;
+      dirLight.color.setHex(0xff6633); dirLight.intensity = 2.5;
+      fillLight.color.setHex(0xffb6c1); fillLight.intensity = 0.5;
       scene.background = new THREE.Color(0xff7f50); 
   } else if (window.timeMode === 'NIGHT') {
-      ambientLight.color.setHex(0x404040); ambientLight.intensity = 0.2;
-      dirLight.color.setHex(0xaaccff); dirLight.intensity = 0.5; 
-      fillLight.color.setHex(0x000033); fillLight.intensity = 0.2;
+      ambientLight.color.setHex(0x222222); ambientLight.intensity = 0.3;
+      dirLight.color.setHex(0xaaccff); dirLight.intensity = 1.2; 
+      fillLight.color.setHex(0x000033); fillLight.intensity = 0.4;
       scene.background = new THREE.Color(0x000011); 
   }
   updateWeather();
 }
 
+window.stadiumLights = [];
+window.ledBoards = [];
+
 function setupEnvironment() {
+  const hw = PITCH_W/2 + 4, hh = PITCH_H/2 + 4;
+  const concreteMat = new THREE.MeshStandardMaterial({ color: 0x111318, roughness: 1.0 });
+
+  // 1. Concrete Stands
+  const standsGroup = new THREE.Group();
+  function createStand(w, d, x, y, z, rotY) {
+    const geo = new THREE.PlaneGeometry(w, d);
+    const mesh = new THREE.Mesh(geo, concreteMat);
+    mesh.rotation.x = -Math.PI/2 + 0.5; // Angled up
+    mesh.rotation.y = rotY;
+    mesh.rotation.order = 'YXZ'; // Important for compound rotation
+    mesh.position.set(x, y, z);
+    mesh.receiveShadow = true;
+    standsGroup.add(mesh);
+  }
+  
+  createStand(PITCH_W * 1.2, 40, 0, 10, -(hh + 15), 0); // North
+  createStand(PITCH_W * 1.2, 40, 0, 10, (hh + 15), Math.PI); // South
+  createStand(PITCH_H * 1.2, 40, -(hw + 15), 10, 0, -Math.PI/2); // West
+  createStand(PITCH_H * 1.2, 40, (hw + 15), 10, 0, Math.PI/2); // East
+  scene.add(standsGroup);
+
+  // 2. Crowd Particles on the stands (Structured Seating)
   const cGeo = new THREE.BufferGeometry();
   const cPts = [], cCol = [], cBaseY = [];
-  const p1 = new THREE.Color('#ff2222'), p2 = new THREE.Color('#2222ff'), p3 = new THREE.Color('#ffffff'), p4 = new THREE.Color('#ffff22');
-  const hw = PITCH_W/2 + 6, hh = PITCH_H/2 + 6;
-  for (let i = 0; i < 5000; i++) {
-     let x, z;
-     if (Math.random() > 0.5) { 
-       x = (Math.random() - 0.5) * PITCH_W * 1.2;
-       z = Math.random() > 0.5 ? hh + Math.random()*20 : -hh - Math.random()*20;
-     } else { 
-       z = (Math.random() - 0.5) * PITCH_H * 1.2;
-       x = Math.random() > 0.5 ? hw + Math.random()*20 : -hw - Math.random()*20;
-     }
-     const dist = Math.max(Math.abs(x)-hw, Math.abs(z)-hh);
-     const y = dist * 0.6 + Math.random() * 2 + 1;
-     cPts.push(x, y, z);
-     cBaseY.push(y);
-     const c = [p1,p2,p3,p4][Math.floor(Math.random()*4)];
-     cCol.push(c.r, c.g, c.b);
+  const colors = [new THREE.Color('#ff2222'), new THREE.Color('#2222ff'), new THREE.Color('#ffffff'), new THREE.Color('#ffff22')];
+  
+  const numRows = 20;
+  for (let side = 0; side < 4; side++) {
+      const standWidth = (side < 2) ? PITCH_W * 1.1 : PITCH_H * 1.1;
+      const seats = Math.floor(standWidth / 0.8); // 1 seat every 0.8 meters
+      
+      for (let r = 0; r < numRows; r++) {
+          for (let s = 0; s < seats; s++) {
+             // 20% chance for an empty seat
+             if (Math.random() < 0.2) continue;
+             
+             const depth = (r / numRows) * 38 - 19; // -19 to 19 depth
+             const width = (s / seats - 0.5) * standWidth;
+             
+             // 0.5 rad angle
+             const height = 10 + depth * Math.sin(0.5);
+             const distOut = 15 + depth * Math.cos(0.5);
+             
+             let x, z, y;
+             if (side === 0) { x = width; z = -hh - distOut; y = height; } // North
+             else if (side === 1) { x = width; z = hh + distOut; y = height; } // South
+             else if (side === 2) { x = -hw - distOut; z = width; y = height; } // West
+             else if (side === 3) { x = hw + distOut; z = width; y = height; } // East
+             
+             // Tiny random jitter so it looks human, not robotic
+             const jx = (Math.random() - 0.5) * 0.3;
+             const jz = (Math.random() - 0.5) * 0.3;
+             
+             cPts.push(x + jx, y + 0.5 + Math.random()*0.3, z + jz);
+             cBaseY.push(y);
+             const c = colors[Math.floor(Math.random()*4)];
+             cCol.push(c.r, c.g, c.b);
+          }
+      }
   }
   cGeo.setAttribute('position', new THREE.Float32BufferAttribute(cPts, 3));
   cGeo.setAttribute('baseY', new THREE.Float32BufferAttribute(cBaseY, 1));
   cGeo.setAttribute('color', new THREE.Float32BufferAttribute(cCol, 3));
-  crowdParticles = new THREE.Points(cGeo, new THREE.PointsMaterial({ size: 0.7, vertexColors: true, transparent:true, opacity:0.85 }));
+  crowdParticles = new THREE.Points(cGeo, new THREE.PointsMaterial({ size: 0.8, vertexColors: true, transparent:true, opacity:0.9 }));
   scene.add(crowdParticles);
+
+  // 3. Volumetric Spotlights
+  const flareCanvas = document.createElement('canvas'); flareCanvas.width = 128; flareCanvas.height = 128;
+  const ctx = flareCanvas.getContext('2d');
+  const grad = ctx.createRadialGradient(64,64,0, 64,64,64);
+  grad.addColorStop(0, 'rgba(255,255,255,1)');
+  grad.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,128,128);
+  const flareTex = new THREE.CanvasTexture(flareCanvas);
+  
+  const lightPositions = [
+    [-hw-20, 35, -hh-20], [hw+20, 35, -hh-20],
+    [-hw-20, 35, hh+20], [hw+20, 35, hh+20]
+  ];
+  
+  lightPositions.forEach(pos => {
+    const spriteMat = new THREE.SpriteMaterial({ map: flareTex, color: 0xffffff, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0 });
+    const sprite = new THREE.Sprite(spriteMat);
+    sprite.position.set(pos[0], pos[1], pos[2]);
+    sprite.scale.set(60, 60, 1);
+    scene.add(sprite);
+    window.stadiumLights.push(sprite);
+  });
+
+  // 4. Crowd Effects (Flares and Flags)
+  window.crowdFlares = [];
+  window.crowdFlags = [];
+  const crowdFlareCanvas = document.createElement('canvas'); crowdFlareCanvas.width = 64; crowdFlareCanvas.height = 64;
+  const fctx = crowdFlareCanvas.getContext('2d');
+  const fgrad = fctx.createRadialGradient(32,32,0, 32,32,32);
+  fgrad.addColorStop(0, 'rgba(255,150,100,1)');
+  fgrad.addColorStop(0.3, 'rgba(255,50,0,0.8)');
+  fgrad.addColorStop(1, 'rgba(255,0,0,0)');
+  fctx.fillStyle = fgrad; fctx.fillRect(0,0,64,64);
+  const crowdFlareTex = new THREE.CanvasTexture(crowdFlareCanvas);
+  const flareMat = new THREE.SpriteMaterial({ map: crowdFlareTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+
+  const flagGeo = new THREE.PlaneGeometry(1.5, 1.0);
+  // Shift flag geometry so rotation point is at the left edge (the pole)
+  flagGeo.translate(0.75, 0, 0);
+  const flagCols = [0xff0000, 0x0000ff, 0xffffff, 0xffff00, 0x00ff00, 0xff00ff, 0x00ffff];
+  
+  const cpos = crowdParticles.geometry.attributes.position.array;
+  const numSeats = cpos.length / 3;
+  for(let i=0; i<40; i++) {
+     const idx = Math.floor(Math.random() * numSeats) * 3;
+     if (i < 20) {
+       const flare = new THREE.Sprite(flareMat);
+       flare.position.set(cpos[idx], cpos[idx+1]+0.5, cpos[idx+2]);
+       flare.userData.baseScale = 4 + Math.random()*4;
+       flare.userData.offset = Math.random() * 100;
+       scene.add(flare);
+       window.crowdFlares.push(flare);
+     } else {
+       const flagMat = new THREE.MeshBasicMaterial({ color: flagCols[Math.floor(Math.random()*flagCols.length)], side: THREE.DoubleSide });
+       const flag = new THREE.Mesh(flagGeo, flagMat);
+       flag.position.set(cpos[idx], cpos[idx+1]+2.0, cpos[idx+2]);
+       flag.userData.offset = Math.random() * 100;
+       flag.userData.speed = 4 + Math.random() * 4;
+       
+       const poleGeo = new THREE.CylinderGeometry(0.04, 0.04, 3);
+       const poleMat = new THREE.MeshBasicMaterial({color:0x444444});
+       const pole = new THREE.Mesh(poleGeo, poleMat);
+       pole.position.set(0, -1, 0);
+       flag.add(pole);
+       
+       scene.add(flag);
+       window.crowdFlags.push(flag);
+     }
+  }
 }
 
 function updateWeather() {
@@ -2268,8 +2444,25 @@ function updateWeather() {
 
 // ===================== PITCH =====================
 function createPitch() {
+  const nsc = document.createElement('canvas'); nsc.width = 512; nsc.height = 512;
+  const nsctx = nsc.getContext('2d');
+  nsctx.fillStyle = '#8080ff';
+  nsctx.fillRect(0,0,512,512);
+  const nImgData = nsctx.getImageData(0,0,512,512);
+  const nData = nImgData.data;
+  for(let k=0; k<nData.length; k+=4) {
+     nData[k] = Math.max(0, Math.min(255, 128 + (Math.random() - 0.5) * 80));
+     nData[k+1] = Math.max(0, Math.min(255, 128 + (Math.random() - 0.5) * 80));
+  }
+  nsctx.putImageData(nImgData, 0, 0);
+  const normalTex = new THREE.CanvasTexture(nsc);
+  normalTex.wrapS = THREE.RepeatWrapping; normalTex.wrapT = THREE.RepeatWrapping;
+  normalTex.repeat.set(24, 24);
+
   const grassGeo = new THREE.PlaneGeometry(PITCH_W + 14, PITCH_H + 14);
-  const grass = new THREE.Mesh(grassGeo, new THREE.MeshLambertMaterial({ color: 0x2d5a1e }));
+  // Update grass color to be slightly less neon/vibrant for realism
+  const grassMat = new THREE.MeshStandardMaterial({ color: 0x254a18, roughness: 0.8, metalness: 0.1, normalMap: normalTex, normalScale: new THREE.Vector2(1.5, 1.5) });
+  const grass = new THREE.Mesh(grassGeo, grassMat);
   grass.rotation.x = -Math.PI/2; grass.receiveShadow = true;
   scene.add(grass);
 
@@ -2303,39 +2496,43 @@ function createPitch() {
   drawWear(0, 512, 280, 0.2);
   drawWear(2048, 512, 280, 0.2);
 
+  const hw = PITCH_W/2, hh = PITCH_H/2;
+  function mapX(val) { return (val + hw) / PITCH_W * 2048; }
+  function mapZ(val) { return (val + hh) / PITCH_H * 1024; }
+  sctx.strokeStyle = 'rgba(255,255,255,0.9)'; sctx.lineWidth = 6; sctx.fillStyle = 'rgba(255,255,255,0.9)';
+  sctx.strokeRect(3, 3, 2042, 1018); 
+  sctx.beginPath(); sctx.moveTo(1024, 0); sctx.lineTo(1024, 1024); sctx.stroke();
+  sctx.beginPath(); sctx.arc(1024, 512, mapX(9.15)-1024, 0, Math.PI*2); sctx.stroke();
+  sctx.beginPath(); sctx.arc(1024, 512, 6, 0, Math.PI*2); sctx.fill();
+  const paW_px = (16.5 / PITCH_W) * 2048, paH_px = (40.3 / PITCH_H) * 1024;
+  sctx.strokeRect(3, 512 - paH_px/2, paW_px, paH_px); sctx.strokeRect(2045 - paW_px, 512 - paH_px/2, paW_px, paH_px); 
+  const gaW_px = (5.5 / PITCH_W) * 2048, gaH_px = (18.3 / PITCH_H) * 1024;
+  sctx.strokeRect(3, 512 - gaH_px/2, gaW_px, gaH_px); sctx.strokeRect(2045 - gaW_px, 512 - gaH_px/2, gaW_px, gaH_px); 
+  const ps_px = (11 / PITCH_W) * 2048;
+  sctx.beginPath(); sctx.arc(ps_px, 512, 4, 0, Math.PI*2); sctx.fill();
+  sctx.beginPath(); sctx.arc(2048 - ps_px, 512, 4, 0, Math.PI*2); sctx.fill();
+  sctx.beginPath(); sctx.arc(ps_px, 512, mapX(9.15)-1024, -0.92, 0.92); sctx.stroke();
+  sctx.beginPath(); sctx.arc(2048 - ps_px, 512, mapX(9.15)-1024, Math.PI - 0.92, Math.PI + 0.92); sctx.stroke();
+
   const stripeTex = new THREE.CanvasTexture(sc);
   stripeTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
   stripeTex.generateMipmaps = true;
   stripeTex.minFilter = THREE.LinearMipmapLinearFilter;
-  const sp = new THREE.Mesh(new THREE.PlaneGeometry(PITCH_W, PITCH_H), new THREE.MeshLambertMaterial({ map: stripeTex }));
+  const spMat = new THREE.MeshStandardMaterial({ map: stripeTex, roughness: 0.75, metalness: 0.1, normalMap: normalTex, normalScale: new THREE.Vector2(1.5, 1.5) });
+  const sp = new THREE.Mesh(new THREE.PlaneGeometry(PITCH_W, PITCH_H), spMat);
   sp.rotation.x = -Math.PI/2; sp.position.y = 0.005; sp.receiveShadow = true;
   scene.add(sp);
 
-  const lineMat = new THREE.LineBasicMaterial({ color:0xffffff, opacity:0.9, transparent:true });
-  function addLine(pts) {
-    const g = new THREE.BufferGeometry().setFromPoints(pts);
-    const l = new THREE.Line(g, lineMat); l.position.y = 0.02; scene.add(l);
-  }
-  const hw = PITCH_W/2, hh = PITCH_H/2;
-  addLine([new THREE.Vector3(-hw,0,-hh), new THREE.Vector3(hw,0,-hh), new THREE.Vector3(hw,0,hh), new THREE.Vector3(-hw,0,hh), new THREE.Vector3(-hw,0,-hh)]);
-  addLine([new THREE.Vector3(0,0,-hh), new THREE.Vector3(0,0,hh)]);
-  const cp = [];
-  for (let i = 0; i <= 64; i++) { const a = (i/64)*Math.PI*2; cp.push(new THREE.Vector3(Math.cos(a)*9, 0, Math.sin(a)*9)); }
-  addLine(cp);
-  const dot = new THREE.Mesh(new THREE.CircleGeometry(0.3,16), new THREE.MeshBasicMaterial({color:0xffffff}));
-  dot.rotation.x = -Math.PI/2; dot.position.y = 0.015; scene.add(dot);
+  const goalMat = new THREE.MeshStandardMaterial({ color:0xffffff, roughness: 0.3, metalness: 0.8 });
+  
+  const netC = document.createElement('canvas'); netC.width = 64; netC.height = 64;
+  const netCtx = netC.getContext('2d');
+  netCtx.strokeStyle = 'rgba(255,255,255,0.9)'; netCtx.lineWidth = 4;
+  netCtx.beginPath(); netCtx.moveTo(0,0); netCtx.lineTo(64,64); netCtx.moveTo(64,0); netCtx.lineTo(0,64); netCtx.stroke();
+  const netTex = new THREE.CanvasTexture(netC);
+  netTex.wrapS = THREE.RepeatWrapping; netTex.wrapT = THREE.RepeatWrapping; netTex.repeat.set(12, 8);
+  const nMat = new THREE.MeshBasicMaterial({ map: netTex, transparent: true, opacity: 0.9, side: THREE.DoubleSide });
 
-  const paW=16.5, paH=40.3;
-  addLine([new THREE.Vector3(-hw,0,-paH/2), new THREE.Vector3(-hw+paW,0,-paH/2), new THREE.Vector3(-hw+paW,0,paH/2), new THREE.Vector3(-hw,0,paH/2)]);
-  addLine([new THREE.Vector3(hw,0,-paH/2), new THREE.Vector3(hw-paW,0,-paH/2), new THREE.Vector3(hw-paW,0,paH/2), new THREE.Vector3(hw,0,paH/2)]);
-  const gaW=5.5, gaH=18.3;
-  addLine([new THREE.Vector3(-hw,0,-gaH/2), new THREE.Vector3(-hw+gaW,0,-gaH/2), new THREE.Vector3(-hw+gaW,0,gaH/2), new THREE.Vector3(-hw,0,gaH/2)]);
-  addLine([new THREE.Vector3(hw,0,-gaH/2), new THREE.Vector3(hw-gaW,0,-gaH/2), new THREE.Vector3(hw-gaW,0,gaH/2), new THREE.Vector3(hw,0,gaH/2)]);
-
-  const sMat = new THREE.MeshBasicMaterial({color:0xffffff});
-  [-hw+11, hw-11].forEach(x => { const s = new THREE.Mesh(new THREE.CircleGeometry(0.2,12), sMat); s.rotation.x = -Math.PI/2; s.position.set(x,0.015,0); scene.add(s); });
-
-  const goalMat = new THREE.MeshLambertMaterial({color:0xffffff});
   function createGoal(gx) {
     const dir = gx > 0 ? 1 : -1;
     const g = new THREE.Group();
@@ -2344,7 +2541,6 @@ function createPitch() {
     const p2 = new THREE.Mesh(pg, goalMat); p2.position.set(0,1.3,GOAL_W/2); p2.castShadow = true;
     const cr = new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,GOAL_W,8), goalMat);
     cr.rotation.x = Math.PI/2; cr.position.set(0,2.6,0); cr.castShadow = true;
-    const nMat = new THREE.MeshBasicMaterial({color:0xeeeeee, transparent:true, opacity:0.3, wireframe:true});
     
     const nbGeo = new THREE.PlaneGeometry(GOAL_W, 2.6, 8, 8);
     const nb = new THREE.Mesh(nbGeo, nMat); 
@@ -2354,7 +2550,8 @@ function createPitch() {
 
     const ns1 = new THREE.Mesh(new THREE.PlaneGeometry(2.5,2.6, 4,4), nMat); ns1.position.set(1.25 * dir, 1.3, -GOAL_W/2);
     const ns2 = new THREE.Mesh(new THREE.PlaneGeometry(2.5,2.6, 4,4), nMat); ns2.position.set(1.25 * dir, 1.3, GOAL_W/2); ns2.rotation.y = Math.PI;
-    g.add(p1,p2,cr,nb,ns1,ns2);
+    const nt = new THREE.Mesh(new THREE.PlaneGeometry(GOAL_W, 2.5, 4,4), nMat); nt.rotation.x = Math.PI/2; nt.position.set(1.25 * dir, 2.6, 0);
+    g.add(p1,p2,cr,nb,ns1,ns2,nt);
     g.position.x = gx; scene.add(g);
     goals.push({ x:gx, zMin:-GOAL_W/2, zMax:GOAL_W/2, yMax:2.6, netBack: nb, impactTime: 0 });
   }
@@ -2440,7 +2637,7 @@ function createPlayer(teamData, num, x, z, role, subRole, isUserTeam, playerData
   const style = teamData.style || 'classic';
   let torso, leftArm, rightArm, head, leftThigh, rightThigh, leftCalf, rightCalf;
 
-  if (window.use3DModels && window.ModelCache && window.ModelCache.playerBuffer) {
+  if (teamData.style === '3dmodel' && window.ModelCache && window.ModelCache.playerBuffer) {
     window.modelsLoading++;
     group.userData.is3DModel = true;
     const loader = new THREE.GLTFLoader();
@@ -2604,20 +2801,7 @@ function createPlayer(teamData, num, x, z, role, subRole, isUserTeam, playerData
   const nameMesh = new THREE.Mesh(new THREE.PlaneGeometry(0.45,0.12), new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(lc), transparent:true}));
   nameMesh.position.set(0,1.6,-0.16); nameMesh.rotation.y = Math.PI; group.add(nameMesh);
 
-  // Hype Aura
-  const rating = playerData ? playerData.rating : 75;
-  const isStar = rating >= 89;
-  const isSuperstar = rating >= 92;
-  const auraMat = new THREE.MeshBasicMaterial({
-    color: isSuperstar ? primary : 0xffaa00, 
-    transparent:true, 
-    opacity: isSuperstar ? 0.3 : (isStar ? 0.15 : 0), 
-    blending:THREE.AdditiveBlending, 
-    side:THREE.DoubleSide
-  });
-  const aura = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, 2.0, 16, 1, true), auraMat);
-  aura.position.y = 1.0;
-  group.add(aura);
+  // Removed intrusive 'Hype Aura' cylinder.
 
   const ring = new THREE.Mesh(new THREE.RingGeometry(0.4,0.5,20), new THREE.MeshBasicMaterial({color:0xffff00, transparent:true, opacity:0, side:THREE.DoubleSide}));
   ring.rotation.x = -Math.PI/2; ring.position.set(x, 0.03, z); scene.add(ring);
@@ -3864,19 +4048,26 @@ function resolvePlayerCollisions() {
 function moveToward(p, tx, tz, speed, dt) {
   const ratingMult = getRatingMult(p);
   const pSpeed = p.stats ? p.stats.speed : 0.5;
-  let actualSpeed = speed * ratingMult * (0.6 + pSpeed * 0.8) * 1.4; // Tempo is handled by ratingMult
   
-  // AI Stamina Exhaustion
-  const intensity = speed / PLAYER_SPEED;
-  if (intensity > 1.05) {
-    p.stamina = Math.max(0, p.stamina - dt * 8 * (intensity - 1) * 5);
-    if (p.stamina < 30) actualSpeed *= 0.85;
+  // Phase 1: AI Sprint Fix without touching base speeds or inertia curves
+  let isSprinting = false;
+  if (p.burstTime > 0 && p.stamina > 5) {
+    isSprinting = true;
+    p.burstTime -= dt;
+    p.stamina = Math.max(0, p.stamina - dt * 8); // Consume stamina exactly like human
+  }
+  
+  let actualSpeed = (isSprinting ? SPRINT_SPEED : speed) * ratingMult * (0.6 + pSpeed * 0.8) * 1.4;
+  
+  if (!isSprinting) {
+    // Normal AI Stamina Exhaustion
+    const intensity = speed / PLAYER_SPEED;
+    if (intensity > 1.05) {
+      p.stamina = Math.max(0, p.stamina - dt * 8 * (intensity - 1) * 5);
+      if (p.stamina < 30) actualSpeed *= 0.85;
+    }
   }
 
-  if (p.burstTime > 0) {
-    actualSpeed *= 1.3;
-    p.burstTime -= dt;
-  }
   const dx = tx - p.x, dz = tz - p.z;
   const dist = Math.hypot(dx, dz);
   if (dist > 0.5) {
@@ -4336,12 +4527,27 @@ function getThreatScore(tx, tz, p, dir) {
         }
       }
     });
-    if (pathClear) score += 15;
     
-    // Dynamic Support Layers
-    if (p.role === 'mid') score -= Math.abs(distToBall - 12) * 0.6; // Midfielders offer short/medium support
-    if (p.role === 'fwd') score -= Math.abs(distToBall - 22) * 0.6; // Forwards push deep
-    if (p.role === 'wing') score -= Math.abs(distToBall - 18) * 0.6; // Wingers stretch
+    // Phase 2: Passing Triangles & Strong Support Structure
+    if (pathClear) {
+        score += 45; // HUGE bonus for open passing lane (was 15)
+        
+        // Evaluate Triangle Shapes (Diagonals)
+        const dot = ((tx - ballOwner.x) * dir) / (distToBall || 1); // 1 = straight ahead, 0 = side, -1 = behind
+        const isTriangle = Math.abs(dot) > 0.3 && Math.abs(dot) < 0.9; // 25 to 70 degrees roughly
+        if (isTriangle) {
+            score += 35; // Bonus for forming a triangle/diamond shape!
+        }
+    }
+    
+    // Dynamic Support Layers - Tighter structural adherence
+    if (p.role === 'def') {
+        if (p.subRole === 'wb' || p.subRole === 'inverted_wb') score -= Math.abs(distToBall - 18) * 1.2;
+        else score -= Math.abs(distToBall - 22) * 1.5; // CBs stay deeper
+    }
+    else if (p.role === 'mid') score -= Math.abs(distToBall - 12) * 1.5; // Midfielders offer tight short/medium support
+    else if (p.role === 'fwd') score -= Math.abs(distToBall - 22) * 1.2; // Forwards push deep
+    else if (p.role === 'wing') score -= Math.abs(distToBall - 25) * 1.0; // Wingers stretch wide
   }
 
   // Offside Line Penalty
@@ -4516,6 +4722,15 @@ function updateAI(p, dt) {
     return;
   }
 
+  // --- REACTION DELAY LOGIC (Fog of War) ---
+  if (p.reactionDelay > 0) {
+      p.reactionDelay -= dt;
+      // Coasting with friction, mimicking human hesitation
+      p.vx *= Math.pow(0.96, dt * 60); 
+      p.vz *= Math.pow(0.96, dt * 60);
+      return; // Skip decision making
+  }
+
   const tactics = getTeamTactics(p.team);
   const myTeamHasBall = ballOwner && (ballOwner.isUserTeam === p.isUserTeam);
   const oppTeamHasBall = ballOwner && (ballOwner.isUserTeam !== p.isUserTeam);
@@ -4624,6 +4839,13 @@ function updateAI(p, dt) {
     if (nearestOpp > 5 && goalDist < 22) shootChance *= 1.5;
     
     shootChance *= getRatingMult(p); // Scales with difficulty
+    
+    // --- Phase 3: Tactical Identity (Shooting Habits) ---
+    if (tactics.style === 'possession') shootChance *= 0.6; // They look for the perfect pass
+    else if (tactics.style === 'counter_attack') shootChance *= 1.4; // They shoot early!
+    else if (tactics.style === 'wing_play') {
+       if (Math.abs(p.z) > 15) shootChance *= 0.3; // Wingers cross instead of shooting
+    }
     
     if ((Math.random() < shootChance) || (p.holdTime > 2.5 && goalDist < 18 && isGoodAngle)) {
       aiShoot(p); p.holdTime = 0; return;
@@ -5950,6 +6172,25 @@ function update(dt) {
 
 // ===================== CAMERA =====================
 function updateCamera(dt) {
+  if (!isPlaying) {
+    if (window.menuCamTween && window.menuCamTween.active) {
+       window.menuCamTween.progress += dt;
+       const t = Math.min(window.menuCamTween.progress / 1.0, 1.0);
+       // easeOutQuad
+       const ease = 1 - (1 - t) * (1 - t);
+       camera.position.lerpVectors(window.menuCamTween.start, window.menuCamTween.end, ease);
+       camera.lookAt(0, 0, 0);
+       if (t >= 1.0) window.menuCamTween.active = false;
+    } else {
+       const orbitSpeed = 0.05;
+       const time = performance.now() * 0.001 * orbitSpeed;
+       const radius = 60;
+       camera.position.set(Math.cos(time) * radius, 30, Math.sin(time) * radius);
+       camera.lookAt(0, 0, 0);
+    }
+    return;
+  }
+
   if (!camTransition.active) {
     let tx, tz;
     if (goalScored && celebrationType && goalScorer) {
@@ -6430,11 +6671,43 @@ function drawMinimap() {
 }
 
 // ===================== TEAM SELECT & MANAGEMENT =====================
+window.selectedCategory = 'club';
+
+function setTeamCategory(category) {
+  window.selectedCategory = category;
+  
+  // Update tab UI
+  document.querySelectorAll('.team-tab').forEach(tab => {
+    if (tab.dataset.category === category) {
+      tab.style.color = 'var(--text-primary)';
+      tab.style.borderBottomColor = 'var(--accent)';
+    } else {
+      tab.style.color = 'var(--text-secondary)';
+      tab.style.borderBottomColor = 'transparent';
+    }
+  });
+
+  // Re-render team list
+  renderTeamsList('teamsListUser', true);
+}
+
 function renderTeamsList(containerId, isUser) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
+  
+  // If no teams match the category (e.g. classic/custom), show a placeholder
+  let matchCount = 0;
   Object.keys(TEAMS_DB).forEach(key => {
     const t = TEAMS_DB[key];
+    
+    // Check if the team matches the current selected category.
+    // For AI teams (isUser == false), we show everything regardless of tab, or maybe just club vs club?
+    // Let's filter the user team list by the selected category.
+    // The AI list can stay unfiltered, or we can just filter everything. 
+    // Actually, let's filter both lists by the selected category so it makes sense.
+    if (t.type !== window.selectedCategory) return;
+    
+    matchCount++;
     const card = document.createElement('div');
     card.className = 'teamCard';
     card.dataset.team = key;
@@ -6450,19 +6723,19 @@ function renderTeamsList(containerId, isUser) {
       else if(overall <= 80) stars = "⭐⭐⭐";
 
       const playStyles = ["Possession", "Counter Attack", "High Press", "Wing Play"];
-      const style = playStyles[overall % 4];
+      const style = (t.tactics && t.tactics.style) ? t.tactics.style : playStyles[overall % 4];
 
       return `
-        <div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start; margin-bottom:12px;">
-          <div class="teamColor" style="background:linear-gradient(135deg,${c1} 50%,${c2} 50%); width:48px; height:48px; border:2px solid var(--border); box-shadow:var(--shadow-base); margin:0;"></div>
+        <div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start; margin-bottom:12px; position:relative; z-index:2;">
+          <div class="teamColor" style="background:linear-gradient(135deg,${c1} 50%,${c2} 50%); width:54px; height:54px; border:2px solid rgba(255,255,255,0.1); box-shadow:0 4px 12px rgba(0,0,0,0.4); margin:0;"></div>
           <div style="text-align:right;">
-            <div style="font-size:12px; opacity:0.8; font-family:var(--font-family); font-weight:bold;">OVR ${overall}</div>
-            <div style="font-size:10px;">${stars}</div>
+            <div style="font-size:20px; font-family:var(--font-family); font-weight:900; line-height:1;">${overall}</div>
+            <div style="font-size:10px; opacity:0.6; font-weight:800; letter-spacing:1px; margin-top:2px;">OVR</div>
           </div>
         </div>
-        <div class="section-title" style="text-align:left; color:var(--text-primary); margin-bottom:4px; font-size:18px;">${t.name}</div>
-        <div class="caption" style="text-align:left; color:var(--accent); margin-bottom:16px; text-transform:uppercase; font-weight:bold;">${style}</div>
-        <div style="display:flex; justify-content:space-between; font-size:14px; background:var(--surface-alt); padding:10px; border-radius:8px; font-family:var(--font-family);">
+        <div class="section-title" style="text-align:left; color:var(--text-primary); margin-bottom:4px; font-size:20px; font-weight:800; position:relative; z-index:2;">${t.name}</div>
+        <div class="caption" style="text-align:left; color:var(--accent); margin-bottom:16px; text-transform:uppercase; font-weight:800; letter-spacing:1px; font-size:11px; position:relative; z-index:2;">${style}</div>
+        <div style="display:flex; justify-content:space-between; font-size:14px; background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; font-family:var(--font-family); position:relative; z-index:2; border:1px solid rgba(255,255,255,0.02);">
           <div style="display:flex; flex-direction:column; align-items:center;">
             <span style="opacity:0.5; font-size:10px; font-weight:bold;">ATT</span>
             <span style="font-weight:800; color:${t.att>85?'var(--success)':'#fff'}">${t.att}</span>
@@ -6504,11 +6777,26 @@ function renderTeamsList(containerId, isUser) {
          c.classList.remove('selected');
       });
       card.classList.add('selected');
-      container.querySelectorAll('.kit-selector').forEach(ks => ks.style.display = 'none');
-      card.querySelector('.kit-selector').style.display = 'flex';
+      
+      // We do not have kit-selector display:none logic here anymore since updateCard() rebuilds it!
       
       if (isUser) {
         document.documentElement.style.setProperty('--accent', TEAMS_DB[key].colorHex);
+        
+        // Trigger a subtle camera transition in the background
+        if (typeof camera !== 'undefined') {
+           const startX = camera.position.x;
+           const startY = camera.position.y;
+           const startZ = camera.position.z;
+           
+           // Simple tweening logic inside animate() using a global object
+           window.menuCamTween = {
+             active: true,
+             start: new THREE.Vector3(startX, startY, startZ),
+             end: new THREE.Vector3(startX * 0.8, Math.max(20, startY * 0.9), startZ * 0.8),
+             progress: 0
+           };
+        }
       }
       
       const selectedTeam = JSON.parse(JSON.stringify(TEAMS_DB[key]));
@@ -6522,11 +6810,18 @@ function renderTeamsList(containerId, isUser) {
         aiTeam = selectedTeam;
       }
       if (userTeam && aiTeam) document.getElementById('startBtn').disabled = false;
+      updateCard();
     };
 
     card.addEventListener('click', handleSelect);
     container.appendChild(card);
   });
+  
+  if (matchCount === 0 && isUser) {
+    container.innerHTML = `<div style="text-align:center; padding: 40px; color:var(--text-secondary); width:100%;">
+      <h3>No teams available in this category yet.</h3>
+    </div>`;
+  }
 }
 
 function setupTeamSelect() {
@@ -6570,8 +6865,13 @@ function setupTeamSelect() {
     if (players.length > 0) {
         applyTeamChanges();
     } else {
-        document.getElementById('teamA').textContent = userTeam.name;
-        document.getElementById('teamB').textContent = aiTeam.name;
+        const getAbbr = (name) => {
+           const p = name.split(' ');
+           if (p.length >= 2) return (p[0][0] + p[1].substring(0,2)).toUpperCase();
+           return name.substring(0,3).toUpperCase();
+        };
+        document.getElementById('teamA').textContent = getAbbr(userTeam.name);
+        document.getElementById('teamB').textContent = getAbbr(aiTeam.name);
         document.getElementById('teamAColor').style.background = userTeam.colorHex;
         document.getElementById('teamBColor').style.background = aiTeam.colorHex;
         setupTeams();
@@ -6601,7 +6901,7 @@ function setupTeamSelect() {
         return;
     }
     window.isCpuVsCpu = document.getElementById('cpuVsCpuCheckbox').checked;
-    window.use3DModels = true;
+    window.use3DModels = (userTeam.style === '3dmodel' || aiTeam.style === '3dmodel');
     document.getElementById('playBtn').textContent = 'Loading...';
 
     if (window.use3DModels && !window.ModelCache) {
@@ -6831,19 +7131,25 @@ if (closeStatsBtn) {
 
   // Update Formation Select Container
   const formHtml = `
-    <div style="display:flex; gap:10px; align-items:center;">
-      <select id="formation-manageUser" style="background:var(--surface-alt); color:var(--text-primary); border:1px solid var(--border); border-radius:8px; padding:8px 16px; font-size:14px; outline:none; cursor:pointer; font-family:var(--font-family);">
-        <option value="4-3-3" ${teamObj.formationName === '4-3-3' ? 'selected' : ''}>4-3-3</option>
-        <option value="4-4-2" ${teamObj.formationName === '4-4-2' ? 'selected' : ''}>4-4-2</option>
-        <option value="3-5-2" ${teamObj.formationName === '3-5-2' ? 'selected' : ''}>3-5-2</option>
-      </select>
-      <select id="style-manageUser" style="background:var(--surface-alt); color:var(--text-primary); border:1px solid var(--border); border-radius:8px; padding:8px 16px; font-size:14px; outline:none; cursor:pointer; font-family:var(--font-family);">
-        <option value="classic" ${(!teamObj.style || teamObj.style === 'classic') ? 'selected' : ''}>\u05e7\u05dc\u05d0\u05e1\u05d9 \u05de\u05e9\u05d5\u05d3\u05e8\u05d2 \uD83D\uDC55</option>
-        <option value="pop" ${teamObj.style === 'pop' ? 'selected' : ''}>\u05e4\u05d5\u05e4 \uD83D\uDFEA</option>
-        <option value="minion" ${teamObj.style === 'minion' ? 'selected' : ''}>\u05de\u05d9\u05e0\u05d9\u05d5\u05e0\u05d9\u05dd \uD83C\uDF4C</option>
-        <option value="anime" ${teamObj.style === 'anime' ? 'selected' : ''}>\u05d0\u05e0\u05d9\u05de\u05d4 \uD83E\uDDB8\u200D\u2642\uFE0F</option>
-        <option value="3dmodel" ${teamObj.style === '3dmodel' ? 'selected' : ''}>מודל תלת-מימד 🤖</option>
-      </select>
+    <div style="display:flex; flex-direction:column; gap:16px; margin-top:24px;">
+      <div style="background:var(--surface); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        <div style="font-size:12px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:800;">Team Formation</div>
+        <select id="formation-manageUser" style="width:100%; background:rgba(0,0,0,0.5); color:var(--accent); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px 16px; font-size:18px; font-weight:800; outline:none; cursor:pointer; font-family:var(--font-family); transition:border-color 0.2s;">
+          <option value="4-3-3" ${teamObj.formationName === '4-3-3' ? 'selected' : ''}>4-3-3 Attacking</option>
+          <option value="4-4-2" ${teamObj.formationName === '4-4-2' ? 'selected' : ''}>4-4-2 Flat</option>
+          <option value="3-5-2" ${teamObj.formationName === '3-5-2' ? 'selected' : ''}>3-5-2 Possession</option>
+        </select>
+      </div>
+      <div style="background:var(--surface); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        <div style="font-size:12px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:800;">Player Models</div>
+        <select id="style-manageUser" style="width:100%; background:rgba(0,0,0,0.5); color:var(--text-primary); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px 16px; font-size:16px; font-weight:800; outline:none; cursor:pointer; font-family:var(--font-family); transition:border-color 0.2s;">
+          <option value="3dmodel" ${teamObj.style === '3dmodel' ? 'selected' : ''}>3D Model (Next-Gen) 🤖</option>
+          <option value="classic" ${(!teamObj.style || teamObj.style === 'classic') ? 'selected' : ''}>Classic Arcade 👕</option>
+          <option value="pop" ${teamObj.style === 'pop' ? 'selected' : ''}>Pop Art 🟦</option>
+          <option value="minion" ${teamObj.style === 'minion' ? 'selected' : ''}>Minions 🍌</option>
+          <option value="anime" ${teamObj.style === 'anime' ? 'selected' : ''}>Anime Hero 🦸‍♂️</option>
+        </select>
+      </div>
     </div>
   `;
   document.getElementById('formationSelectContainer').innerHTML = formHtml;
@@ -6961,10 +7267,37 @@ function animateEnvironment(dt) {
      }
      weatherParticles.geometry.attributes.position.needsUpdate = true;
   }
+  
+  if (window.stadiumLights) {
+    const targetOp = (window.timeMode === 'DAY') ? 0 : (window.timeMode === 'SUNSET' ? 0.6 : 1.0);
+    window.stadiumLights.forEach(l => {
+      l.material.opacity += (targetOp - l.material.opacity) * dt * 2.0;
+    });
+  }
+  
+  // Animate crowd flares
+  if (window.crowdFlares) {
+    const time = performance.now() * 0.001;
+    window.crowdFlares.forEach(f => {
+       const s = f.userData.baseScale + Math.sin(time * 15 + f.userData.offset) * 1.5;
+       f.scale.set(s, s, 1);
+       f.material.opacity = 0.7 + Math.sin(time * 25 + f.userData.offset) * 0.3;
+    });
+  }
+  
+  // Animate crowd flags
+  if (window.crowdFlags) {
+    const time = performance.now() * 0.001;
+    window.crowdFlags.forEach(f => {
+       f.rotation.z = Math.sin(time * f.userData.speed + f.userData.offset) * 0.6;
+       f.rotation.y = Math.sin(time * f.userData.speed * 0.5 + f.userData.offset) * 0.3;
+    });
+  }
+  
   if (crowdParticles) {
     if (Math.random() < 0.08) {
       const colors = crowdParticles.geometry.attributes.color;
-      const idx = Math.floor(Math.random() * 5000);
+      const idx = Math.floor(Math.random() * 8000);
       const r = colors.getX(idx), g = colors.getY(idx), b = colors.getZ(idx);
       colors.setXYZ(idx, 1, 1, 1);
       colors.needsUpdate = true;
@@ -6982,7 +7315,7 @@ function animateEnvironment(dt) {
         const pos = crowdParticles.geometry.attributes.position.array;
         const baseY = crowdParticles.geometry.attributes.baseY.array;
         const time = performance.now() * 0.005;
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < baseY.length; i++) {
           const x = pos[i * 3];
           const z = pos[i * 3 + 2];
           const angle = Math.atan2(z, x);
@@ -6993,7 +7326,7 @@ function animateEnvironment(dt) {
     } else if (crowdParticles.geometry.attributes.baseY) {
       const pos = crowdParticles.geometry.attributes.position.array;
       const baseY = crowdParticles.geometry.attributes.baseY.array;
-      for (let i = 0; i < 5000; i++) {
+      for (let i = 0; i < baseY.length; i++) {
         pos[i * 3 + 1] = baseY[i];
       }
       crowdParticles.geometry.attributes.position.needsUpdate = true;
@@ -7599,6 +7932,7 @@ window.addEventListener('DOMContentLoaded', init);
 
   // ---- F8 (Telemetry) / F9 (NetSim) Keyboard Shortcuts ----
   document.addEventListener('keydown', (e) => {
+    if (!window.DEBUG_MODE) return;
     if (e.code === 'F8') {
       e.preventDefault();
       const overlay = document.getElementById('telemetryOverlay');
